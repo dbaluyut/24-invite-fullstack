@@ -11,6 +11,7 @@ import {
   selectNotGoing,
   notGoingAsync,
 } from "./profileCardSlice"
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 
 export default function ProfileCard() {
   const randomUser = useSelector(selectProfile)
@@ -34,21 +35,43 @@ export default function ProfileCard() {
   // console.log(notGoingList)
 
   return (
-    <div>
-      <h1>test</h1>
-      <h1>Going: {goingList.length}</h1>
-      <h1>not Going: {notGoingList.length}</h1>
-
-      <img src={randomUser.img_thumb}></img>
-      <li>
-        Name: {randomUser.first} {randomUser.last}
-      </li>
-      <li>Phone: {randomUser.phone}</li>
-      <li>Email: {randomUser.email}</li>
-      <button onClick={() => dispatch(personNotGoing(randomUser))}>
-        not going
-      </button>
-      <button onClick={() => dispatch(personGoing(randomUser))}>going</button>
+    <div className="main">
+      <div className="main-container">
+        <div className="links-container">
+          <Link to="/goingView">
+            <li className="linkto">Going: {goingList.length}</li>
+          </Link>
+          <Link to="/notGoingView">
+            <li className="linkto">not Going: {notGoingList.length}</li>
+          </Link>
+        </div>
+        <div className="card-main">
+          <div className="img-container">
+            <img src={randomUser.img_thumb}></img>
+          </div>
+          <div className="info-container">
+            <li>
+              Name: {randomUser.first} {randomUser.last}
+            </li>
+            <li>Phone: {randomUser.phone}</li>
+            <li>Email: {randomUser.email}</li>
+          </div>
+        </div>
+        <div className="btn-container">
+          <button
+            className="not-going"
+            onClick={() => dispatch(personNotGoing(randomUser))}
+          >
+            <i class="fas fa-times"></i>
+          </button>
+          <button
+            className="going"
+            onClick={() => dispatch(personGoing(randomUser))}
+          >
+            <i class="fas fa-check"></i>
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

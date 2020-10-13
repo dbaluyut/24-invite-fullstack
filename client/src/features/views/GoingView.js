@@ -15,14 +15,26 @@ import {
 export default function GoingView() {
   const dispatch = useDispatch()
   const goingList = useSelector(selectGoing)
-
+  useEffect(() => {
+    dispatch(goingAsync())
+  }, [])
   return (
-    <div>
-      <h1>going view</h1>
+    <div className="container">
+      <h3 className="title">Going</h3>
+
       {goingList.map((person) => {
         return (
-          <div>
-            <h1>{person.first}</h1>
+          <div className="card">
+            <div className="img-container">
+              <img src={person.img_thumb}></img>
+            </div>
+            <div className="info-container">
+              <li>
+                Name: {person.first} {person.last}
+              </li>
+              <li>Phone: {person.phone}</li>
+              <li>Email: {person.email}</li>
+            </div>
           </div>
         )
       })}

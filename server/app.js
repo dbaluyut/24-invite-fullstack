@@ -32,7 +32,7 @@ app.get("/api", (req, res) => {
         last: user.name.last,
         email: user.email,
         phone: user.phone,
-        img_thumb: user.picture.medium,
+        img_thumb: user.picture.large,
       })
     })
 })
